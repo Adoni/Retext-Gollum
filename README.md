@@ -1,5 +1,5 @@
 ReText is a simple but powerful editor for Markdown and ReStructuredText markup languages.
-You can read more about ReText on [our website](http://retext.sourceforge.net/) or in the [original author's wiki](http://sourceforge.net/p/retext/wiki/).
+You can read more about ReText on [our website](http://treeofsephiroth.github.com) or in the [original author's wiki](http://sourceforge.net/p/retext/wiki/).
 
 ReText is written in Python and runs on Linux and other POSIX-compatible platforms.
 You do not need to compile the source code, it can be interpreted by Python (version 2 or 3).
