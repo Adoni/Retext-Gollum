@@ -1,3 +1,6 @@
+2.2-ikiwiki Tenshi Hinanawi (iruel) <cockmomgler@gmail.com>
+* reads mdwn as a Markdown file
+
 2.1
 * Ability to use QtWebKit
 * Splitter between edit and preview boxes

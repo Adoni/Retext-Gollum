@@ -26,7 +26,7 @@ import subprocess
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-app_name = "ReText"
+app_name = "ReText: Ikiwiki Mod"
 app_version = "2.2.0"
 
 def readListFromSettings(settings, key):
@@ -838,7 +838,7 @@ class ReTextWindow(QMainWindow):
 	
 	def openFile(self):
 		fileNames = QFileDialog.getOpenFileNames(self, self.tr("Select one or several files to open"), "", \
-		self.tr("Supported files")+" (*.re *.md *.markdown *.mdown *.mkd *.mkdn *.rst *.rest *.txt *.html *.htm);;"+self.tr("All files (*)"))
+		self.tr("Supported files")+" (*.re *.md *.mdwn *.markdown *.mdown *.mkd *.mkdn *.rst *.rest *.txt *.html *.htm);;"+self.tr("All files (*)"))
 		for fileName in fileNames:
 			self.openFileWrapper(fileName)
 	
@@ -869,7 +869,7 @@ class ReTextWindow(QMainWindow):
 			openfile.close()
 			self.editBoxes[self.ind].setPlainText(html)
 			suffix = QFileInfo(self.fileNames[self.ind]).suffix()
-			pt = not (suffix in ('re', 'md', 'markdown', 'mdown', 'mkd', 'mkdn', 'rst', 'rest', 'html', 'htm'))
+			pt = not (suffix in ('re', 'mdwn', 'md', 'markdown', 'mdown', 'mkd', 'mkdn', 'rst', 'rest', 'html', 'htm'))
 			self.actionPlainText.setChecked(pt)
 			self.enablePlainText(pt)
 			self.setCurrentFile()
@@ -901,7 +901,7 @@ class ReTextWindow(QMainWindow):
 				defaultExt = self.tr("HTML files")+" (*.html *.htm)"
 				ext = ".html"
 			else:
-				defaultExt = self.tr("Markdown files")+" (*.re *.md *.markdown *.mdown *.mkd *.mkdn *.txt)"
+				defaultExt = self.tr("Markdown files")+" (*.re *.mdwn *.md *.markdown *.mdown *.mkd *.mkdn *.txt)"
 				ext = ".mkd"
 				if settings.contains('defaultExt'):
 					ext = settings.value('defaultExt', type='QString')
@@ -1249,9 +1249,10 @@ class ReTextWindow(QMainWindow):
 	
 	def aboutDialog(self):
 		QMessageBox.about(self, self.aboutWindowTitle, \
-		'<p><b>'+app_name+' '+app_version+'</b><br>'+self.tr('Simple but powerful editor for Markdown and ReStructuredText') \
-		+'</p><p>'+self.tr('Author: Dmitry Shachnev, 2011') \
-		+'<br><a href="http://sourceforge.net/p/retext/">'+self.tr('Website') \
+		'<p><b>'+app_name+' '+app_version+'</b><br>'+self.tr('Simple but powerful editor for Markdown, Ikiwiki, and ReStructuredText') \
+		+'</p><p>'+self.tr('Original Author: Dmitry Shachnev, 2011') \
+		+'</p><p>'+self.tr('Ikiwiki Mod Author: Tenshi Hinanawi, 2012')+'</p><p>' \
+		+'<br><a href="http://sourceforge.net/p/retext/">'+self.tr('Original Website') \
 		+'</a> | <a href="http://daringfireball.net/projects/markdown/syntax">'+self.tr('Markdown syntax') \
 		+'</a> | <a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">' \
 		+self.tr('ReST syntax')+'</a></p>')
@@ -1275,7 +1276,7 @@ class ReTextWindow(QMainWindow):
 	def getParser(self):
 		if self.fileNames[self.ind]:
 			suffix = QFileInfo(self.fileNames[self.ind]).suffix()
-			if suffix in ('md', 'markdown', 'mdown', 'mkd', 'mkdn'):
+			if suffix in ('md', 'mdwn', 'markdown', 'mdown', 'mkd', 'mkdn'):
 				if use_md:
 					return PARSER_MARKDOWN
 				else:
